@@ -1,0 +1,18 @@
+# STVD环境下忽略
+*.bat
+*.spy
+*.stp
+*.pdb
+*.wdb
+*.stw
+*.wdb
+*.wed  
+*.dep    
+*.txt 
+Listing/
+Doc/
+Debug/
+Release/
+si/
+alarm_Programmer/
+
