@@ -4,6 +4,7 @@
 #include "delay.h"
 #include "timer1.h"
 #include "led.h"
+#include <string.h>
 
 u8 mode;//lora--1/FSK--0
 u8 Freq_Sel;//
@@ -37,9 +38,9 @@ const u8 sx1276_7_8LoRaBwTbl[10] =
   0,1,2,3,4,5,6,7,8,9
 };
 
-const u8  sx1276_7_8Data[] = {"HR_WT Lora sx1276_7_8"};
+const u8  sx1276_7_8Data[] = {"Alarm"};
 
-u8 RxData[64];
+u8 RxData[DATA_LEN];
 
 void sx1276_7_8_Standby(void)
 {
@@ -154,11 +155,11 @@ u8 sx1276_7_8_LoRaRxPacket(void)
   u8 i; 
   u8 addr;
   u8 packet_size;
+  u8 msg_size = sizeof(sx1276_7_8Data);
  
   if(Get_NIRQ())
   {
-    for(i=0;i<32;i++) 
-      RxData[i] = 0x00;
+    memset(RxData, 0x00 , DATA_LEN);
     
     addr = SPIRead(LR_RegFifoRxCurrentaddr);      //last packet addr
     SPIWrite(LR_RegFifoAddrPtr,addr);                      //RxBaseAddr -> FiFoAddrPtr    
@@ -169,12 +170,12 @@ u8 sx1276_7_8_LoRaRxPacket(void)
     SPIBurstRead(0x00, RxData, packet_size);
     
     sx1276_7_8_LoRaClearIrq();
-    for(i=0;i<17;i++)
+    for(i=0;i<msg_size;i++)
     {
       if(RxData[i]!=sx1276_7_8Data[i])
         break;  
     }    
-    if(i>=17)                                              //Rx success
+    if(i>=msg_size)                                              //Rx success
       return(1);
     else
       return(0);
@@ -219,7 +220,7 @@ u8 sx1276_7_8_LoRaTxPacket(void)
   u8 TxFlag=0;
   u8 addr;
   
-	BurstWrite(0x00, (u8 *)sx1276_7_8Data, 21);
+	BurstWrite(0x00, (u8 *)sx1276_7_8Data, sizeof(sx1276_7_8Data));
 	SPIWrite(LR_RegOpMode,0x8b);                    //Tx Mode           
 	while(1)
 	{
@@ -234,87 +235,4 @@ u8 sx1276_7_8_LoRaTxPacket(void)
 		}
 	} 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

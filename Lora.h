@@ -4,6 +4,9 @@
 #include "stm8s.h"
 #include "spi.h"
 
+// 定义接收和发送的数据长度
+#define DATA_LEN		64
+
 #define CR_4_5    
 //#define CR_4_6    0
 //#define CR_4_7    0
@@ -172,7 +175,7 @@ extern u16 SysTime;
 extern void delay_ms(unsigned int ms);
 extern void delay_us(unsigned int us);
 
-extern u8 RxData[64];
+extern u8 RxData[DATA_LEN];
 extern void sx1276_7_8_Config(void);
 extern u8 sx1276_7_8_LoRaEntryRx(void);
 extern u8 sx1276_7_8_LoRaReadRSSI(void);
