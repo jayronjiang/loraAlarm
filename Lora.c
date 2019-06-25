@@ -140,6 +140,7 @@ u8 sx1276_7_8_LoRaEntryRx(void)
 		if(SysTime>=3)	
 			return 0;                                              //over time for error
 	}
+return 1;
 }
 
 u8 sx1276_7_8_LoRaReadRSSI(void)

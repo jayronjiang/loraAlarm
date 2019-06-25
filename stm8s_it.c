@@ -116,12 +116,12 @@ INTERRUPT_HANDLER(EXTI_PORTA_IRQHandler, 3)
   * @param  None
   * @retval None
   */
-INTERRUPT_HANDLER(EXTI_PORTB_IRQHandler, 4)
+INTERRUPT_HANDLER(EXTI_PORTB_IRQHandler, 5)
 {
   /* In order to detect unexpected events during development,
      it is recommended to set a breakpoint on the following instruction.
   */
-  #if 0
+  #if 1
 	if(!Get_KEY())
 	{
 		key_flag = 1;

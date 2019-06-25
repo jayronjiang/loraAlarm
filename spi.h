@@ -3,9 +3,9 @@
 
 #include "stm8s.h"
 
-// SPI-NSS  PE5
-#define nSEL_PORT  (GPIOE)				
-#define nSEL_PINS  (GPIO_PIN_5)
+// SPI-NSS  PA3
+#define nSEL_PORT  (GPIOA)				
+#define nSEL_PINS  (GPIO_PIN_3)
 
 //SPI-SCK  PC5
 #define SCK_PORT  (GPIOC)
@@ -19,12 +19,12 @@
 #define SDO_PORT  (GPIOC)
 #define SDO_PINS  (GPIO_PIN_7)
 
-// SPI-RESET PG1
-#define SDN_PORT  (GPIOG)
-#define SDN_PINS  (GPIO_PIN_1)
+// SPI-RESET PC3
+#define SDN_PORT  (GPIOC)
+#define SDN_PINS  (GPIO_PIN_3)
 
-// DIO0	PC4
-#define TX_DONE_PORT  (GPIOC)
+// DIO0	PB4
+#define TX_DONE_PORT  (GPIOB)
 #define TX_DONE_PINS  (GPIO_PIN_4)
 
 

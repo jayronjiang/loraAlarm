@@ -6,7 +6,7 @@
 #include "timer1.h"
 #include "lora.h"
 
-#define MASTER 0
+#define MASTER 1
 
 void Variable_Init(void)
 {
@@ -23,14 +23,15 @@ void Hardware_Init(void)
 {
 	CLK->CKDIVR = 0x00;
 	delay_ms(100);
-	//LED_Init();
-	//KEY_Init();
+	LED_Init();
+	KEY_Init();
 	SPI_GPIO_Init();
 	TIMER1_Init();
 }
 
 void main(void)
 {
+	volatile static u8 test = 0;
 	Variable_Init();
 	_asm("sim");
 	Hardware_Init();
@@ -38,7 +39,7 @@ void main(void)
 	TIM1->CR1   |= 0x01;
 	TIM2->CR1   |= 0x01;
 	sx1276_7_8_Config();
-	sx1276_7_8_LoRaEntryRx();
+	test  = sx1276_7_8_LoRaEntryRx();
 	
   while (1)
   {
